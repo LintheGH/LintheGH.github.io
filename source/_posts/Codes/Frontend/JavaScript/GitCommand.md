@@ -2,10 +2,12 @@
 title: git 常用命令
 date: "2020/12/7 4:33:48"
 categories:
+- Code
 - Code Tools
 tags:
 - git
 ---
+
 ### git 常用命令 1.1
 - 版本回退
   - `git log` 查看历史记录
