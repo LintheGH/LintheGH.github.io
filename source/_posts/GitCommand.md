@@ -6,7 +6,7 @@ categories:
 tags:
 - git
 ---
-### git 常用命令
+### git 常用命令 1.1
 - 版本回退
   - `git log` 查看历史记录
   - `git reset --hard HEAD^` 回退到上一次版本
