@@ -1,5 +1,5 @@
 ---
-title: `node`的`process`进程对象
+title: node的process进程对象
 categories: 
 - Code
 - Node
