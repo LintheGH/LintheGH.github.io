@@ -6,7 +6,7 @@ categories:
 tags: 
 - iframe
 - 点击劫持
--X-FRAME-OPTIONS
+- X-FRAME-OPTIONS
 ---
 
 ### 点击劫持（UI-覆盖攻击）
