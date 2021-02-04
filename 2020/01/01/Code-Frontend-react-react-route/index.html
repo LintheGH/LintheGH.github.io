@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="frontend"><title>react-router | 时刻</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">react-router</h1><a id="logo" href="/.">时刻</a><p class="description">无时无刻</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">react-router</h1><div class="post-meta">2020-01-01<span> | </span><span class="category"><a href="/categories/Code/">Code</a><a href="/categories/Code/React/">React</a></span></div><div class="post-content"><p>react-router介绍</p>
+<a id="more"></a>
+<h4 id="react-路由"><a href="#react-路由" class="headerlink" title="react 路由"></a>react 路由</h4><hr>
+<p>react-router的使用</p>
+<ul>
+<li><p>react-router、react-router-dom、react-router-native的区别</p>
+<ul>
+<li>react-router是路由的核心，react-router-dom 比前者多出了 <code>&lt;link&gt;</code>，<code>&lt;BrowserRouter&gt;</code> 这样的 DOM 类组件</li>
+<li>如果你在开发一个网站，你应该使用<code>react-router-dom</code>，如果你在移动应用的开发环境使用React Native，你应该使用<code>react-router-native</code></li>
+<li>我们这里使用 react-router-dom 即可</li>
+</ul>
+</li>
+<li><p><code>react-router</code>（react-router-dom）的使用</p>
+<ul>
+<li><p>基本的路由结构为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRouter&gt;<span class="comment">// 或者 HashRouter</span></span><br><span class="line">  &lt;Route&gt;&lt;/Route&gt;</span><br><span class="line">  &lt;Route&gt;&lt;/Route&gt;</span><br><span class="line">  &lt;Route&gt;&lt;/Route&gt;</span><br><span class="line">&lt;/BrowserRouter&gt;</span><br></pre></td></tr></table></figure>
+<p>因此，我们首先需要在 SPA 应用最外层包裹上一个 Router，Router 分为两种：BrowserRouter 和 HashRouter</p>
+<ul>
+<li>BrowserRouter:<br>使用了HTML5的history API来记录你的路由历史使用了HTML5的history API来记录你的路由历史</li>
+<li>HashRouter:<br>使用URL<code>(window.location.hash)</code>的hash部分来记录</li>
+</ul>
+</li>
+<li><p>在需要切换路由的时候，使用 <code>&lt;Route&gt;</code> 来作为匹配路由选择</p>
+<ul>
+<li>Route 的一些参数：<ul>
+<li>path：string 路径</li>
+<li>component:componentcomponent 渲染的组件。当访问地址和路由匹配时，对应的 component 将会被渲染，并且传入 match、location、history</li>
+<li>render：func render 函数返回需要渲染的组件</li>
+<li>exact：boolean 为 true 时路径将会精准匹配，’/one’ 的路由将不能匹配 ‘/one/two’</li>
+<li>strict：boolean 对路径末尾斜杠的匹配，为 true 时 ‘/one/‘ 将不能匹配 ‘/one’ 但可以匹配 ‘/one/two’，需要确保路由没有末尾斜杠，那么需要 exact 和 strict 都为 true<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Router exact=&#123; <span class="literal">true</span> &#125; path=<span class="string">&quot;/home&quot;</span> component= &#123; AppHome &#125; /&gt; </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;Switch&gt;</code><br>  Switch 只会渲染第一个与当前访问地址匹配的 Router 或者 redirect，有效防止同级路由多次渲染</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Router  path=<span class="string">&quot;/&quot;</span> component= &#123; AppHome &#125; /&gt;</span><br><span class="line">  &lt;Router  path=<span class="string">&quot;/mine&quot;</span> component= &#123; AppMine &#125; /&gt;</span><br><span class="line">&lt;/Switch&gt;</span><br><span class="line"><span class="comment">// 当路径为&#x27;/&#x27;时，只渲染第一个</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>&lt;Redirect&gt;</code>：重定向。可以使用 Redirect 组件，添加 from 、to 属性进行重定向跳转</p>
+</li>
+<li><p><code>&lt;Link&gt;</code> 和 <code>&lt;NavLink&gt;</code>：</p>
+<ul>
+<li><code>&lt;Link&gt;</code>：声明式导航<ul>
+<li>to：string 跳转指定路径</li>
+<li>to: Object 带参数跳转到指定路径<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link to=&#123;&#123;</span><br><span class="line">  pathname: <span class="string">&#x27;/course&#x27;</span>,</span><br><span class="line">  state: &#123; <span class="attr">price</span>: <span class="number">18</span> &#125;</span><br><span class="line">&#125;&#125;&gt;</span><br></pre></td></tr></table></figure></li>
+<li>replace: boolean 跳转时，是否替换访问历史</li>
+</ul>
+</li>
+<li><code>&lt;NavLink&gt;</code>: <code>&lt;Link&gt;</code> 的特殊版，增加了：<ul>
+<li>activeClassName: String 激活时的类名</li>
+<li>activeStyle: Object 激活时的内联样式</li>
+<li>exact：boolean 是否精准匹配</li>
+<li>strict：bolean 是否匹配最后的斜杠</li>
+<li>isActive：func 激活时执行函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>history</code> 对象通常具有以下属性和方法：</p>
+<ul>
+<li>length: number 浏览历史堆栈中的条目数</li>
+<li>action: string 路由跳转到当前页面执行的动作，分为 PUSH, REPLACE, POP</li>
+<li>location: object 当前访问地址信息组成的对象，具有如下属性：<ul>
+<li><code>pathname</code>: string URL路径</li>
+<li>search: string URL中的查询字符串</li>
+<li>hash: string URL的 hash 片段</li>
+<li>state: string 例如执行 push(path, state) 操作时，location 的 state 将被提供到堆栈信息里，state 只有在 browser 和 memory history 有效。</li>
+<li><code>push(path, [state])</code> 在历史堆栈信息里加入一个新条目。</li>
+<li><code>replace(path, [state])</code> 在历史堆栈信息里替换掉当前的条目</li>
+<li><code>go(n)</code> 将 history 堆栈中的指针向前移动 n。</li>
+<li>goBack() 等同于 go(-1)</li>
+<li>goForward 等同于 go(1)</li>
+<li>block(prompt) 阻止跳转</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>location</code>:当前的位置，将要去的位置，或是之前所在的位置<br>在以下情境中可以获取 location 对象</p>
+<ul>
+<li>在 Route component 中，以 <code>this.props.location</code> 获取</li>
+<li>在 Route render 中，以 <code>(&#123;location&#125;) =&gt; ()</code> 方式获取</li>
+<li>在 Route children 中，以 <code>(&#123;location&#125;) =&gt; ()</code> 方式获取</li>
+<li>在 withRouter 中，以 <code>this.props.location</code> 的方式获取</li>
+</ul>
+</li>
+<li><p>路由传参：</p>
+</li>
+<li><p><code>&lt;withRouter&gt;</code> 根据传入的组件生成一个新的组件（高阶组件），<code>&lt;withRouter&gt;</code> 处理过的组件外面会有 Router ，可以使用 <code>this.props.history</code> 等的属性</p>
+</li>
+<li><p>路由钩子：<br>react-router 没有路由钩子，我们需要根据组件的声明周期做出相应的处理<br>比如，当我们要监听某一个组件的进入和离开，我们利用<code>componentWillMount</code>、<code>componentWillUnmount</code><br>全局路由切换, 我们觉得在App里监听就可以了，因为当路由切换的时候，父级路由组件的location属性中pathname会变化<br>但是App组件虽然是全部路由组件的父级组件，但是它不是一个路由组件，所以App外面没有Route组件，所以App没有location属性，所以，无法坚持属性的变化<br>我们可以李扬withRouter来将App处理一下，就是在他外面包一个Route来实现这一个功能<br>我们发现withRouter他可以在任意组件外面包上Route，也就是说，可以让非路由组件也能使用到路由相关的属性</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>react-router 的原生数组对象写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routeConfig = [</span><br><span class="line">&#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    component: App,</span><br><span class="line">    indexRoute: &#123; <span class="attr">component</span>: Dashboard &#125;,</span><br><span class="line">    childRoutes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;about&#x27;</span>, <span class="attr">component</span>: About &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;inbox&#x27;</span>,</span><br><span class="line">        component: Inbox,</span><br><span class="line">        childRoutes: [</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">&#x27;/messages/:id&#x27;</span>, <span class="attr">component</span>: Message &#125;,</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">&#x27;messages/:id&#x27;</span>,</span><br><span class="line">            onEnter: <span class="function"><span class="keyword">function</span> (<span class="params">nextState, replaceState</span>) </span>&#123;</span><br><span class="line">            replaceState(<span class="literal">null</span>, <span class="string">&#x27;/messages/&#x27;</span> + nextState.params.id)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">routes</span>=<span class="string">&#123;routeConfig&#125;</span> /&gt;</span></span>, <span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复合式写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Router history=&#123;hashHistory&#125;&gt;</span><br><span class="line">  &#123;&#123;</span><br><span class="line">      path: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">      component: App,</span><br><span class="line">      childRoutes: []</span><br><span class="line">  &#125;&#125;</span><br><span class="line">  &#123;&#123;</span><br><span class="line">    path: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">getComponent</span>(<span class="params">nextState, callback</span>)</span> &#123;</span><br><span class="line">      <span class="built_in">require</span>.ensure([], <span class="function"><span class="params">require</span> =&gt;</span> &#123;</span><br><span class="line">        callback(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">&#x27;src/login&#x27;</span>));</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="comment">// component 的按需加载式写法</span></span><br><span class="line">  &#125;&#125;</span><br><span class="line">&lt;/Router&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>require-ensure</code><ul>
+<li>说明: <code>require.ensure</code>在需要的时候才下载依赖的模块，当参数指定的模块都下载下来了（下载下来的模块还没执行），便执行参数指定的回调函数。<code>require.ensure</code>会创建一个chunk，且可以指定该chunk的名称，如果这个chunk名已经存在了，则将本次依赖的模块合并到已经存在的chunk中，最后这个chunk在webpack构建的时候会单独生成一个文件。</li>
+<li>语法:<code>require.ensure(dependencies: String[], callback: function([require]), [chunkName: String])</code><ul>
+<li><code>dependencies</code>: 依赖的模块数组</li>
+<li><code>callback</code>: 回调函数，该函数调用时会传一个require参数</li>
+<li><code>chunkName</code>: 模块名，用于构建时生成文件时命名使用</li>
+</ul>
+</li>
+<li>注意点：<code>requi.ensure</code>的模块只会被下载下来，不会被执行，只有在回调函数使用<code>require(模块名)</code>后，这个模块才会被执行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>路由的按需加载</p>
+<ul>
+<li>定义加载组件：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncComponent</span>(<span class="params">importComponent</span>) </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">AsyncComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">      <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">this</span>.state = &#123;</span><br><span class="line">        component: <span class="literal">null</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">default</span>: component &#125; = <span class="keyword">await</span> importComponent();</span><br><span class="line"></span><br><span class="line">      <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">        component: component</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> C = <span class="built_in">this</span>.state.component;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> C ? <span class="xml"><span class="tag">&lt;<span class="name">C</span> &#123;<span class="attr">...this.props</span>&#125; /&gt;</span></span> : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> AsyncComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>路由表中使用加载组件：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Buttons = asyncComponent(<span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;./button&quot;</span>));</span><br></pre></td></tr></table></figure></li>
+<li>babel 配置<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;presets&quot;</span>: [</span><br><span class="line">  [</span><br><span class="line">    <span class="string">&quot;es2015&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;stage-1&quot;</span>, <span class="comment">// 应用了es7的语法，所以必须有这个配置</span></span><br><span class="line">  <span class="string">&quot;react&quot;</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><code>react-router</code>相关梳理</p>
+<ul>
+<li><p>什么是<code>react-router-dom</code>、<code>react-router</code>、<code>react-router-native</code>？<br>总括来说，<code>react-router</code>是react管理路由的工具的总称，其中包括核心的<code>react-router</code>，专门为web端的dom绑定操作的<code>react-router-dom</code>， 专门为<code>react-native</code>使用的<code>react-router-native</code>，此外还有<code>react-router-config</code>和<code>react-router-redux</code>，在react-router的官方GitHub上可以看到起关系<br><img src="https://github.com/LintheGH/images/tree/master/note/react-router.png" alt="react-router"></p>
+<p>在项目中</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="tags"><a href="/tags/react-router/"><i class="fa fa-tag"></i>react-router</a></div><div class="post-nav"><a class="pre" href="/2020/01/01/Code-Frontend-react-Hooks/">react Hooks</a><a class="next" href="/2020/01/01/Code-Frontend-react-tips/">react 小tips</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://linthegh.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Code/React/">React</a></li></ul></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/EventLoop/" style="font-size: 15px;">EventLoop</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Hooks/" style="font-size: 15px;">Hooks</a> <a href="/tags/react-router/" style="font-size: 15px;">react-router</a> <a href="/tags/react/" style="font-size: 15px;">react</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/Code-Frontend-javascript-%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/">图片懒加载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/11/%E4%B8%80%E4%B8%AA%E8%AE%B0%E5%BD%95/">一个记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/09/Code-Frontend-javascript-EventLoop/">JavaScript的EventLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/01/Code-Frontend-react-Hooks/">react Hooks</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/01/Code-Frontend-react-react-route/">react-router</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/01/Code-Frontend-react-tips/">react 小tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/01/Code-Frontend-react-react/">react</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">时刻.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
