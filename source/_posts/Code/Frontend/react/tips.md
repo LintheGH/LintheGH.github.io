@@ -1,12 +1,14 @@
 ---
 title: react 小tips
+date: 2020/01/01 00:00:00
 categories: 
 - Code
 - React
 tags: 
 - react
 ---
-
+react 小tips
+<!--more-->
 ### 开发中发现的小技巧/注意事项
 ---
 - `getDerivedStateFromProps` 钩子函数

@@ -1,12 +1,14 @@
 ---
 title: react
+date: 2020/01/01 00:00:00
 categories: 
 - Code
 - React
 tags: 
 - react
 ---
-
+react 介绍
+<!--more-->
 # react:轻量级视图层框架
 
 #### react 高性能的体现：虚拟 DOM 
