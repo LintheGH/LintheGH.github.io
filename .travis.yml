@@ -11,7 +11,7 @@ script:
   - hexo generate # generate static files
 deploy:
   provider: pages
-  skip-cleanup: false
+  skip-cleanup: true
   github-token: $GitHub_Hexo_TOKEN
   keep-history: true
   on:
