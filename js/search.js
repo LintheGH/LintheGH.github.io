@@ -1,5 +1,6 @@
 var searchFunc = function(path, search_id, content_id) {
     'use strict';
+
     $.ajax({
         url: path,
         dataType: "xml",
@@ -23,10 +24,11 @@ var searchFunc = function(path, search_id, content_id) {
                 }
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    // var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_content = data.content.trim().replace(/<\/?.+?\/?>/g,"").toLowerCase();
                     var data_url = data.url;
                     var index_title = -1;
                     var index_content = -1;
@@ -36,9 +38,8 @@ var searchFunc = function(path, search_id, content_id) {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
+                            if(index_title > -1 || index_content > -1) {
+                                isMatch = true
                                 if (index_content < 0) {
                                     index_content = 0;
                                 }
@@ -46,12 +47,23 @@ var searchFunc = function(path, search_id, content_id) {
                                     first_occur = index_content;
                                 }
                             }
+                            // if( index_title < 0 && index_content < 0 ){
+                            //     isMatch = false;
+                            // } else {
+                            //     if (index_content < 0) {
+                            //         index_content = 0;
+                            //     }
+                            //     if (i == 0) {
+                            //         first_occur = index_content;
+                            //     }
+                            // }
                         });
                     }
                     // show search results
                     if (isMatch) {
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        str += "<li><a href='"+ window.location.origin + '/' + data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<\/?.+?\/?>/g,"");
+                        // var content = data.content.trim().replace(/<[^>]+>/g,"");
                         if (first_occur >= 0) {
                             // cut out 100 characters
                             var start = first_occur - 30;

@@ -2,6 +2,10 @@
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 100%;
+    box-shadow:0px 6px 6px rgba(0,0,0,0.09);
+    padding: 0 20px;
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 #sidebar .widget .search-form {
@@ -10,4 +14,4 @@
 
 #sidebar .widget .search-form input {
     width: auto;
-}
+} 
