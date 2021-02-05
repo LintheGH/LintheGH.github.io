@@ -106,3 +106,9 @@ deploy:
   type: 'git'
   repo: https://github.com/LintheGH/LintheGH.github.io # https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
   branch: gh-pages
+
+# 本地搜索配置，基于 maupassant 主题
+search:
+  path: search.xml
+  field: post
+  # content: false
